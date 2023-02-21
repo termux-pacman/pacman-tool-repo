@@ -1,0 +1,5 @@
+name: 'Pacman Tool Repo'
+description: 'Tools for working with pacman db of repo.'
+runs:
+  using: 'node16'
+  main: 'index.js'

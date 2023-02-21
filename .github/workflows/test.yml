@@ -1,0 +1,32 @@
+name: Test
+
+on:
+  push:
+    paths:
+    - 'action.yml'
+    - 'index.js'
+    - 'package.json'
+    - 'package-lock.json'
+    - 'pacman-tool-repo/setup.sh'
+    - 'pacman-tool-repo/repo-add'
+    - 'pacman-tool-repo/util/**'
+    - 'node_modules/**'
+    - '.github/workflows/test.yml'
+
+jobs:
+  debug1:
+    runs-on: ubuntu-latest
+    name: Check commands
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+      - run: |
+          ./test.sh
+  #debug2:
+  #  runs-on: ubuntu-latest
+  #  name: Check commands
+  #  steps:
+  #    - uses: actions/checkout@v3
+  #    - uses: termux-pacman/pacman-tool-repo@v1
+  #    - run: |
+  #        ./test.sh
