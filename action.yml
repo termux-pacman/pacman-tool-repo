@@ -1,5 +1,9 @@
-name: 'Pacman Tool Repo'
+name: pacman-tool-repo
 description: 'Tools for working with pacman db of repo.'
+author: Termux Pacman
+branding:
+  icon: 'database'
+  color: 'blue'
 runs:
   using: 'node16'
   main: 'index.js'
