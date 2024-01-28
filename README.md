@@ -11,7 +11,7 @@ jobs:
     name: Example
     steps:
       - uses: actions/checkout@v4
-      - uses: termux-pacman/pacman-tool-repo@v2
+      - uses: termux-pacman/pacman-tool-repo@v2.1
       - run: |
           repo-add --help
           repo-remove --help
