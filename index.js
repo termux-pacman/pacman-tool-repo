@@ -1,24 +1,27 @@
 // Running a script that sets everything up
 
 const exec = require('@actions/exec');
-const fs = require('fs');
-var https = require('follow-redirects').https;
-const process = require('process');
-const os = require('os');
-const path = require('path');
+const core = require('@actions/core')
 
-tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "ptr"));
-process.chdir(tmpDir);
-const file = fs.createWriteStream("pacman-tool-repo.tar.xz");
-const request = https.get("https://github.com/termux-pacman/pacman-tool-repo/raw/main/pacman-tool-repo.tar.xz", function(response) {
-	response.pipe(file);
-	file.on("finish", async() => {
-		file.close();
-		await exec.exec("tar xJf pacman-tool-repo.tar.xz");
-		fs.unlinkSync("pacman-tool-repo.tar.xz");
-		process.chdir("pacman-tool-repo/");
-		await exec.exec("sudo ./setup.sh");
-		process.chdir(__dirname);
-		fs.rmSync(tmpDir, {recursive:true, force:true});
-	});
-});
+async function start() {
+	await exec.exec("sudo su -c \"echo 'deb http://archive.ubuntu.com/ubuntu/ lunar universe' > /etc/apt/sources.list.d/lunar.list\"");
+	await exec.exec("sudo su -c \"echo 'deb-src http://archive.ubuntu.com/ubuntu/ lunar universe' >> /etc/apt/sources.list.d/lunar.list\"");
+
+	let attempts = 0;
+
+	while (true) {
+		try {
+			await exec.exec("sudo apt update -y");
+			await exec.exec("sudo apt install pacman-package-manager -y");
+			break;
+		} catch (error) {
+			if (attempts > 2) {
+				core.setFailed("Something went wrong :/");
+			}
+			attempts += 1;
+			continue;
+		}
+	}
+}
+
+start();
