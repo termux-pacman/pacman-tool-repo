@@ -1,7 +1,7 @@
 {
   "name": "pacman-tool-repo",
-  "description": "tools for working with pacman db of repo",
-  "version": "1.1",
+  "version": "2.0",
+  "description": "Tools for working with pacman db of repo.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,15 +10,20 @@
     "type": "git",
     "url": "git+https://github.com/termux-pacman/pacman-tool-repo.git"
   },
-  "keywords": ["repo-add", "repo-remove", "pacman"],
-  "author": "Termux Pacman",
+  "keywords": [
+    "actions",
+    "repo-add",
+    "repo-remove",
+    "pacman"
+  ],
+  "author": "termux-pacman",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/termux-pacman/pacman-tool-repo/issues"
   },
   "homepage": "https://github.com/termux-pacman/pacman-tool-repo#readme",
   "dependencies": {
-    "@actions/exec": "^1.1.1",
-    "follow-redirects": "^1.15.2"
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1"
   }
 }

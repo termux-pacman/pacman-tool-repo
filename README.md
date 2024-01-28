@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Example
     steps:
-      - uses: actions/checkout@v3
-      - uses: termux-pacman/pacman-tool-repo@v1.1
+      - uses: actions/checkout@v4
+      - uses: termux-pacman/pacman-tool-repo@v2
       - run: |
           repo-add --help
           repo-remove --help
