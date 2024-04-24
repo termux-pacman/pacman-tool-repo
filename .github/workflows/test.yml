@@ -2,6 +2,16 @@ name: Test
 
 on:
   push:
+    branches:
+    - main
+    paths:
+    - 'action.yml'
+    - 'index.js'
+    - 'package.json'
+    - 'package-lock.json'
+    - 'node_modules/**'
+    - '.github/workflows/test.yml'
+  pull_request:
     paths:
     - 'action.yml'
     - 'index.js'
@@ -18,5 +28,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./
       - run: |
-          sudo apt search pacman
-          repo-add --version
+          for cmd in pacman \
+                     pacman-conf \
+                     makepkg \
+                     pacman-key \
+                     repo-add \
+                     repo-elephant \
+                     repo-remove; do
+            type ${cmd}
+            ${cmd} --version
+          done
